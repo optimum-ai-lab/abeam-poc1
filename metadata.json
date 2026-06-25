@@ -1,0 +1,6 @@
+{
+  "name": "LLM Control Center",
+  "description": "Dashboard for LLM agent management",
+  "requestFramePermissions": [],
+  "majorCapabilities": []
+}
