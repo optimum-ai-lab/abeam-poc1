@@ -1,10 +1,10 @@
-# LLM Control Center
+# Agent Dashboard
 
 A customizable, single-page dashboard for monitoring and managing a global fleet of LLM agents. Build your own view by adding, arranging, and removing widgets that surface real-time metrics, performance trends, deployment health, and agent activity at a glance.
 
 ## What this website does
 
-The **LLM Control Center** is an operations dashboard ("Global Agent Fleet") for teams running large numbers of LLM-powered agents. Instead of a fixed layout, the dashboard is **composed from a library of widgets** that each user can pick from to assemble the view they care about.
+The **Agent Dashboard** is an operations dashboard ("Global Agent Fleet") for teams running large numbers of LLM-powered agents. Instead of a fixed layout, the dashboard is **composed from a library of widgets** that each user can pick from to assemble the view they care about.
 
 ### Core experience
 

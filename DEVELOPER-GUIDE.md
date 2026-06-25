@@ -1,6 +1,6 @@
-# Developer Guide — LLM Control Center
+# Developer Guide — Agent Dashboard
 
-This guide documents the architecture, tech stack, and conventions of the **LLM Control Center** dashboard so developers can quickly orient themselves and extend the app. For a product-level overview, see [`README.md`](./README.md).
+This guide documents the architecture, tech stack, and conventions of the **Agent Dashboard** so developers can quickly orient themselves and extend the app. For a product-level overview, see [`README.md`](./README.md).
 
 ---
 
