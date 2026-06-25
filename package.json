@@ -22,6 +22,7 @@
     "tailwind-merge": "^3.6.0"
   },
   "devDependencies": {
+    "@azure/static-web-apps-cli": "^2.0.9",
     "@types/node": "^22.14.0",
     "tailwindcss": "^4.1.14",
     "typescript": "~5.8.2",
