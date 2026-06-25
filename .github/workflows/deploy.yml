@@ -67,5 +67,4 @@ jobs:
           action: upload
           # We build above, so tell the action not to run its own Oryx build.
           skip_app_build: true
-          skip_api_build: true
           app_location: dist

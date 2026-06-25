@@ -10,6 +10,25 @@ on every push to `main` (and manually via **Run workflow**).
 
 ---
 
+## Current configuration (provisioned 2026-06-25)
+
+Everything below is already set up — this section is the record of what exists.
+
+| Item | Value |
+|------|-------|
+| Static Web App | `client-abeam-swa-poc1-poc` (separate demo app; existing apps untouched) |
+| Live URL | <https://gray-stone-0a7b70d00.7.azurestaticapps.net> |
+| Region | East Asia |
+| App registration | `abeam-poc1-deploy` — client ID `8070a1f4-70c5-474e-bc0d-05228f20c737` |
+| RBAC | `Contributor` scoped to **only** the SWA resource (least privilege) |
+| Federated credential | subject `repo:optimum-ai-lab/abeam-poc1:environment:abeam-poc` |
+| GitHub Environment | `abeam-poc` with secrets `AZURE_CLIENT_ID`, `AZURE_TENANT_ID`, `AZURE_SUBSCRIPTION_ID` |
+
+> The reference instructions below document how this was set up (for re-creation
+> or another environment). You don't need to repeat them for normal deploys.
+
+---
+
 ## One value you must set
 
 Edit `.github/workflows/deploy.yml` and replace the placeholder with the
