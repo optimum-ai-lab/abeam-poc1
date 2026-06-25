@@ -11,13 +11,13 @@ interface WidgetContainerProps {
 
 export function WidgetContainer({ title, onRemove, children, className }: WidgetContainerProps) {
   return (
-    <div className={cn("flex flex-col bg-slate-900 border border-slate-800 rounded-3xl p-5 overflow-hidden h-full", className)}>
+    <div className={cn("flex flex-col bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-5 overflow-hidden h-full transition-colors duration-300", className)}>
       <div className="flex items-center justify-between mb-4">
         <h3 className="text-xs font-bold text-slate-500 uppercase tracking-tighter">{title}</h3>
         {onRemove && (
-          <button 
+          <button
             onClick={onRemove}
-            className="text-slate-500 hover:text-slate-300 transition-colors p-1 rounded-md hover:bg-slate-800"
+            className="text-slate-400 dark:text-slate-500 hover:text-slate-700 dark:hover:text-slate-300 transition-colors p-1 rounded-md hover:bg-slate-100 dark:hover:bg-slate-800"
             aria-label="Remove widget"
           >
             <X size={16} />

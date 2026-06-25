@@ -1,8 +1,18 @@
 import React from 'react';
 import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 import { MOCK_TRENDS_DATA } from '../../data';
+import { useTheme } from '../../context/ThemeContext';
 
 export function TrendsWidget() {
+  const { theme } = useTheme();
+  const isDark = theme === 'dark';
+
+  const gridColor = isDark ? '#334155' : '#e2e8f0';
+  const axisColor = isDark ? '#64748b' : '#94a3b8';
+  const tooltipBg = isDark ? '#1e293b' : '#ffffff';
+  const tooltipBorder = isDark ? '#334155' : '#e2e8f0';
+  const tooltipText = isDark ? '#e2e8f0' : '#1e293b';
+
   return (
     <div className="h-full w-full flex flex-col">
       <div className="flex-1 w-full min-h-[200px]">
@@ -14,12 +24,12 @@ export function TrendsWidget() {
                 <stop offset="95%" stopColor="#6366f1" stopOpacity={0}/>
               </linearGradient>
             </defs>
-            <CartesianGrid strokeDasharray="3 3" stroke="#334155" vertical={false} />
-            <XAxis dataKey="time" stroke="#64748b" fontSize={12} tickLine={false} axisLine={false} />
-            <YAxis stroke="#64748b" fontSize={12} tickLine={false} axisLine={false} />
-            <Tooltip 
-              contentStyle={{ backgroundColor: '#1e293b', borderColor: '#334155', borderRadius: '8px' }}
-              itemStyle={{ color: '#e2e8f0' }}
+            <CartesianGrid strokeDasharray="3 3" stroke={gridColor} vertical={false} />
+            <XAxis dataKey="time" stroke={axisColor} fontSize={12} tickLine={false} axisLine={false} />
+            <YAxis stroke={axisColor} fontSize={12} tickLine={false} axisLine={false} />
+            <Tooltip
+              contentStyle={{ backgroundColor: tooltipBg, borderColor: tooltipBorder, borderRadius: '8px' }}
+              itemStyle={{ color: tooltipText }}
             />
             <Area type="monotone" dataKey="tokens" stroke="#6366f1" strokeWidth={2} fillOpacity={1} fill="url(#colorTokens)" />
           </AreaChart>
