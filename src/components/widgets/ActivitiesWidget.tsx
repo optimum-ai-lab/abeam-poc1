@@ -17,16 +17,16 @@ export function ActivitiesWidget() {
     <div className="h-full overflow-y-auto pr-2 custom-scrollbar">
       <div className="flex flex-col space-y-3">
         {MOCK_ACTIVITIES.map((activity) => (
-          <div key={activity.id} className="flex items-start gap-3 p-3 rounded-lg bg-slate-800/30 border border-slate-800/50 hover:bg-slate-800/50 transition-colors">
+          <div key={activity.id} className="flex items-start gap-3 p-3 rounded-lg bg-slate-50 dark:bg-slate-800/30 border border-slate-200 dark:border-slate-800/50 hover:bg-slate-100 dark:hover:bg-slate-800/50 transition-colors">
             <div className="mt-0.5">
               {getStatusIcon(activity.status)}
             </div>
             <div className="flex-1 min-w-0">
               <div className="flex items-center justify-between mb-1">
-                <span className="text-sm font-medium text-slate-200 truncate">{activity.agentName}</span>
+                <span className="text-sm font-medium text-slate-800 dark:text-slate-200 truncate">{activity.agentName}</span>
                 <span className="text-xs text-slate-500 whitespace-nowrap ml-2">{activity.timestamp}</span>
               </div>
-              <p className="text-xs text-slate-400 truncate">{activity.action}</p>
+              <p className="text-xs text-slate-500 dark:text-slate-400 truncate">{activity.action}</p>
             </div>
           </div>
         ))}
