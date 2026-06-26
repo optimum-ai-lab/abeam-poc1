@@ -1,25 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { DollarSign, TrendingUp, TrendingDown } from 'lucide-react';
+import { fetchCostSummary } from '../../api/cost';
+import { CostSummaryData } from '../../types';
 import { MOCK_COST_SUMMARY } from '../../data';
-
-interface CostKpi { label: string; value: number; delta: number; }
-interface CostSummaryData {
-  spendToday: CostKpi;
-  spendThisMonth: CostKpi;
-  avgCostPerRun: CostKpi;
-  avgCostPerTask: CostKpi;
-  currency: 'USD';
-}
-
-async function fetchCostSummary(): Promise<CostSummaryData> {
-  try {
-    const res = await fetch('/api/cost/summary');
-    if (!res.ok) throw new Error('not ok');
-    return res.json();
-  } catch {
-    return MOCK_COST_SUMMARY;
-  }
-}
 
 function DeltaBadge({ delta }: { delta: number }) {
   const positive = delta >= 0;

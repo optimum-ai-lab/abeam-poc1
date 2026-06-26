@@ -1,23 +1,8 @@
 import React, { useEffect, useState } from 'react';
+import { fetchBudget } from '../../api/cost';
+import { BudgetUtilizationData } from '../../types';
 import { MOCK_BUDGET } from '../../data';
 import { cn } from '../../lib/utils';
-
-interface BudgetPeriod { limit: number; spent: number; projectedSpend: number; }
-interface BudgetData {
-  daily: BudgetPeriod;
-  monthly: BudgetPeriod;
-  currency: 'USD';
-}
-
-async function fetchBudget(): Promise<BudgetData> {
-  try {
-    const res = await fetch('/api/cost/budget');
-    if (!res.ok) throw new Error('not ok');
-    return res.json();
-  } catch {
-    return MOCK_BUDGET;
-  }
-}
 
 function getStatus(pct: number): { label: string; color: string; barColor: string } {
   if (pct >= 100) return { label: 'Over Budget', color: 'text-red-500', barColor: 'bg-red-500' };
@@ -26,7 +11,7 @@ function getStatus(pct: number): { label: string; color: string; barColor: strin
 }
 
 export function BudgetUtilizationWidget() {
-  const [data, setData] = useState<BudgetData>(MOCK_BUDGET);
+  const [data, setData] = useState<BudgetUtilizationData>(MOCK_BUDGET);
   const [loading, setLoading] = useState(false);
 
   async function refresh() {

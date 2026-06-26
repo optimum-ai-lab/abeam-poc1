@@ -1,33 +1,9 @@
 import React, { useEffect, useState } from 'react';
+import { fetchCostDrivers } from '../../api/cost';
+import { CostDriver } from '../../types';
 import { MOCK_COST_DRIVERS } from '../../data';
 
 type Period = 'today' | 'week';
-
-interface CostDriver {
-  agentId: string;
-  agentName: string;
-  totalCost: number;
-  runCount: number;
-  costPerRun: number;
-  shareOfTotal: number;
-}
-
-interface CostDriversData {
-  period: Period;
-  totalSpend: number;
-  drivers: CostDriver[];
-  currency: 'USD';
-}
-
-async function fetchDrivers(period: Period): Promise<CostDriversData> {
-  try {
-    const res = await fetch(`/api/cost/drivers?period=${period}`);
-    if (!res.ok) throw new Error('not ok');
-    return res.json();
-  } catch {
-    return { ...MOCK_COST_DRIVERS, period };
-  }
-}
 
 export function CostDriversWidget() {
   const [period, setPeriod] = useState<Period>('today');
@@ -36,7 +12,7 @@ export function CostDriversWidget() {
 
   async function load(p: Period) {
     setLoading(true);
-    const result = await fetchDrivers(p);
+    const result = await fetchCostDrivers(p);
     setDrivers(result.drivers);
     setLoading(false);
   }

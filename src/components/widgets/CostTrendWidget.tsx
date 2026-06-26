@@ -1,31 +1,20 @@
 import React, { useEffect, useState } from 'react';
 import {
   AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip,
-  ResponsiveContainer, ReferenceLine,
+  ResponsiveContainer,
 } from 'recharts';
-import { MOCK_COST_TREND_24H, MOCK_COST_TREND_7D, MOCK_COST_TREND_30D } from '../../data';
+import { fetchCostTrend } from '../../api/cost';
+import { CostTrendPoint } from '../../types';
+import { MOCK_COST_TREND_24H } from '../../data';
 import { useTheme } from '../../context/ThemeContext';
 
 type Range = '24h' | '7d' | '30d';
-
-interface TrendPoint { time: string; label: string; cost: number; budget?: number; }
-interface CostTrendData { range: Range; granularity: string; currency: 'USD'; points: TrendPoint[]; }
-
-async function fetchCostTrend(range: Range): Promise<CostTrendData> {
-  try {
-    const res = await fetch(`/api/cost/trend?range=${range}`);
-    if (!res.ok) throw new Error('not ok');
-    return res.json();
-  } catch {
-    return range === '24h' ? MOCK_COST_TREND_24H : range === '7d' ? MOCK_COST_TREND_7D : MOCK_COST_TREND_30D;
-  }
-}
 
 export function CostTrendWidget() {
   const { theme } = useTheme();
   const isDark = theme === 'dark';
   const [range, setRange] = useState<Range>('24h');
-  const [points, setPoints] = useState<TrendPoint[]>(MOCK_COST_TREND_24H.points);
+  const [points, setPoints] = useState<CostTrendPoint[]>(MOCK_COST_TREND_24H.points);
   const [loading, setLoading] = useState(false);
 
   const gridColor = isDark ? '#334155' : '#e2e8f0';
