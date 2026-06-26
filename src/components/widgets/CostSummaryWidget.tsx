@@ -50,14 +50,14 @@ export function CostSummaryWidget() {
     },
     {
       label: data.avgCostPerRun.label,
-      value: `$${data.avgCostPerRun.value.toFixed(3)}`,
+      value: `$${data.avgCostPerRun.value.toFixed(2)}`,
       delta: data.avgCostPerRun.delta,
       bg: 'bg-emerald-500/10',
       color: 'text-emerald-500',
     },
     {
       label: data.avgCostPerTask.label,
-      value: `$${data.avgCostPerTask.value.toFixed(3)}`,
+      value: `$${data.avgCostPerTask.value.toFixed(2)}`,
       delta: data.avgCostPerTask.delta,
       bg: 'bg-amber-500/10',
       color: 'text-amber-500',

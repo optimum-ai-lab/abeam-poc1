@@ -25,7 +25,6 @@ export function CostDriversWidget() {
 
   const handlePeriod = (p: Period) => {
     setPeriod(p);
-    load(p);
   };
 
   const maxCost = drivers.length > 0 ? drivers[0].totalCost : 1;

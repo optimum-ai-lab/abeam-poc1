@@ -39,7 +39,6 @@ export function CostTrendWidget() {
 
   const handleRange = (r: Range) => {
     setRange(r);
-    load(r);
   };
 
   const ranges: Range[] = ['24h', '7d', '30d'];
