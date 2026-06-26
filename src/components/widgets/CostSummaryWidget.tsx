@@ -5,8 +5,8 @@ import { CostSummaryData } from '../../types';
 import { MOCK_COST_SUMMARY } from '../../data';
 
 function DeltaBadge({ delta }: { delta: number }) {
-  const positive = delta >= 0;
-  const Icon = positive ? TrendingUp : TrendingDown;
+  const positive = delta <= 0;
+  const Icon = delta >= 0 ? TrendingUp : TrendingDown;
   const color = positive ? 'text-emerald-500' : 'text-red-500';
   return (
     <span className={`flex items-center gap-0.5 text-xs font-medium ${color}`}>
