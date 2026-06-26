@@ -2,15 +2,13 @@ import React, { useEffect, useState } from 'react';
 import { DollarSign, TrendingUp, TrendingDown } from 'lucide-react';
 import { MOCK_COST_SUMMARY } from '../../data';
 
+interface CostKpi { label: string; value: number; delta: number; }
 interface CostSummaryData {
-  spendToday: number;
-  spendTodayDelta: number;
-  spendMonth: number;
-  spendMonthDelta: number;
-  avgCostPerRun: number;
-  avgCostPerRunDelta: number;
-  avgCostPerTask: number;
-  avgCostPerTaskDelta: number;
+  spendToday: CostKpi;
+  spendThisMonth: CostKpi;
+  avgCostPerRun: CostKpi;
+  avgCostPerTask: CostKpi;
+  currency: 'USD';
 }
 
 async function fetchCostSummary(): Promise<CostSummaryData> {
@@ -54,30 +52,30 @@ export function CostSummaryWidget() {
 
   const tiles = [
     {
-      label: 'Spend Today',
-      value: `$${data.spendToday.toLocaleString()}`,
-      delta: data.spendTodayDelta,
+      label: data.spendToday.label,
+      value: `$${data.spendToday.value.toLocaleString(undefined, { maximumFractionDigits: 2 })}`,
+      delta: data.spendToday.delta,
       bg: 'bg-purple-500/10',
       color: 'text-purple-500',
     },
     {
-      label: 'Spend This Month',
-      value: `$${data.spendMonth.toLocaleString()}`,
-      delta: data.spendMonthDelta,
+      label: data.spendThisMonth.label,
+      value: `$${data.spendThisMonth.value.toLocaleString(undefined, { maximumFractionDigits: 2 })}`,
+      delta: data.spendThisMonth.delta,
       bg: 'bg-indigo-500/10',
       color: 'text-indigo-500',
     },
     {
-      label: 'Avg Cost / Run',
-      value: `$${data.avgCostPerRun.toFixed(3)}`,
-      delta: data.avgCostPerRunDelta,
+      label: data.avgCostPerRun.label,
+      value: `$${data.avgCostPerRun.value.toFixed(3)}`,
+      delta: data.avgCostPerRun.delta,
       bg: 'bg-emerald-500/10',
       color: 'text-emerald-500',
     },
     {
-      label: 'Avg Cost / Task',
-      value: `$${data.avgCostPerTask.toFixed(3)}`,
-      delta: data.avgCostPerTaskDelta,
+      label: data.avgCostPerTask.label,
+      value: `$${data.avgCostPerTask.value.toFixed(3)}`,
+      delta: data.avgCostPerTask.delta,
       bg: 'bg-amber-500/10',
       color: 'text-amber-500',
     },

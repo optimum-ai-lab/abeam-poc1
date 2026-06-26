@@ -8,17 +8,16 @@ import { useTheme } from '../../context/ThemeContext';
 
 type Range = '24h' | '7d' | '30d';
 
-interface TrendPoint { time: string; cost: number; }
-interface TrendResponse { data: TrendPoint[]; budgetCeiling?: number | null; }
+interface TrendPoint { time: string; label: string; cost: number; budget?: number; }
+interface CostTrendData { range: Range; granularity: string; currency: 'USD'; points: TrendPoint[]; }
 
-async function fetchCostTrend(range: Range): Promise<TrendResponse> {
+async function fetchCostTrend(range: Range): Promise<CostTrendData> {
   try {
     const res = await fetch(`/api/cost/trend?range=${range}`);
     if (!res.ok) throw new Error('not ok');
     return res.json();
   } catch {
-    const mock = range === '24h' ? MOCK_COST_TREND_24H : range === '7d' ? MOCK_COST_TREND_7D : MOCK_COST_TREND_30D;
-    return { data: mock, budgetCeiling: range === '24h' ? 220 : range === '7d' ? 2300 : 2600 };
+    return range === '24h' ? MOCK_COST_TREND_24H : range === '7d' ? MOCK_COST_TREND_7D : MOCK_COST_TREND_30D;
   }
 }
 
@@ -26,8 +25,7 @@ export function CostTrendWidget() {
   const { theme } = useTheme();
   const isDark = theme === 'dark';
   const [range, setRange] = useState<Range>('24h');
-  const [points, setPoints] = useState<TrendPoint[]>(MOCK_COST_TREND_24H);
-  const [budgetCeiling, setBudgetCeiling] = useState<number | null>(220);
+  const [points, setPoints] = useState<TrendPoint[]>(MOCK_COST_TREND_24H.points);
   const [loading, setLoading] = useState(false);
 
   const gridColor = isDark ? '#334155' : '#e2e8f0';
@@ -39,8 +37,7 @@ export function CostTrendWidget() {
   async function load(r: Range) {
     setLoading(true);
     const result = await fetchCostTrend(r);
-    setPoints(result.data);
-    setBudgetCeiling(result.budgetCeiling ?? null);
+    setPoints(result.points);
     setLoading(false);
   }
 
@@ -88,7 +85,7 @@ export function CostTrendWidget() {
               </linearGradient>
             </defs>
             <CartesianGrid strokeDasharray="3 3" stroke={gridColor} vertical={false} />
-            <XAxis dataKey="time" stroke={axisColor} fontSize={11} tickLine={false} axisLine={false} />
+            <XAxis dataKey="label" stroke={axisColor} fontSize={11} tickLine={false} axisLine={false} />
             <YAxis
               stroke={axisColor}
               fontSize={11}
@@ -99,16 +96,17 @@ export function CostTrendWidget() {
             <Tooltip
               contentStyle={{ backgroundColor: tooltipBg, borderColor: tooltipBorder, borderRadius: '8px' }}
               itemStyle={{ color: tooltipText }}
-              formatter={(v: number) => [`$${v}`, 'Cost']}
+              formatter={(v: number, name: string) => [`$${v}`, name === 'budget' ? 'Budget' : 'Cost']}
             />
-            {budgetCeiling !== null && (
-              <ReferenceLine
-                y={budgetCeiling}
-                stroke="#ef4444"
-                strokeDasharray="4 4"
-                label={{ value: 'Budget', fill: '#ef4444', fontSize: 11, position: 'insideTopRight' }}
-              />
-            )}
+            <Area
+              type="monotone"
+              dataKey="budget"
+              stroke="#ef4444"
+              strokeWidth={1.5}
+              strokeDasharray="4 4"
+              fill="none"
+              dot={false}
+            />
             <Area
               type="monotone"
               dataKey="cost"

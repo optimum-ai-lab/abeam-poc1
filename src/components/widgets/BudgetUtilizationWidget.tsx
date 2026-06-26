@@ -2,11 +2,11 @@ import React, { useEffect, useState } from 'react';
 import { MOCK_BUDGET } from '../../data';
 import { cn } from '../../lib/utils';
 
+interface BudgetPeriod { limit: number; spent: number; projectedSpend: number; }
 interface BudgetData {
-  currentSpend: number;
-  budgetLimit: number | null;
-  elapsedDays: number;
-  totalDays: number;
+  daily: BudgetPeriod;
+  monthly: BudgetPeriod;
+  currency: 'USD';
 }
 
 async function fetchBudget(): Promise<BudgetData> {
@@ -42,19 +42,9 @@ export function BudgetUtilizationWidget() {
     return () => clearInterval(id);
   }, []);
 
-  if (!data.budgetLimit) {
-    return (
-      <div className="h-full flex items-center justify-center">
-        <p className="text-sm text-slate-400 dark:text-slate-500">No budget configured</p>
-      </div>
-    );
-  }
-
-  const pct = Math.min((data.currentSpend / data.budgetLimit) * 100, 100);
+  const monthly = data.monthly;
+  const pct = Math.min((monthly.spent / monthly.limit) * 100, 100);
   const { label, color, barColor } = getStatus(pct);
-  const projected = data.elapsedDays > 0
-    ? (data.currentSpend / data.elapsedDays) * data.totalDays
-    : 0;
 
   return (
     <div className="h-full flex flex-col justify-between gap-3 relative">
@@ -74,17 +64,17 @@ export function BudgetUtilizationWidget() {
 
       <div className="flex items-center justify-between text-xs text-slate-500 dark:text-slate-400">
         <span className="font-medium text-slate-800 dark:text-slate-200">
-          ${data.currentSpend.toLocaleString()}
+          ${monthly.spent.toLocaleString()}
         </span>
-        <span>/ ${data.budgetLimit.toLocaleString()}</span>
+        <span>/ ${monthly.limit.toLocaleString()}</span>
       </div>
 
       <div className="pt-1 border-t border-slate-200 dark:border-slate-800">
         <p className="text-xs text-slate-400 dark:text-slate-500">
-          Projected: <span className="font-medium text-slate-600 dark:text-slate-300">${Math.round(projected).toLocaleString()}</span>
+          Projected: <span className="font-medium text-slate-600 dark:text-slate-300">${Math.round(monthly.projectedSpend).toLocaleString()}</span>
         </p>
         <p className="text-xs text-slate-400 dark:text-slate-500">
-          Day {data.elapsedDays} of {data.totalDays}
+          Daily: ${data.daily.spent.toLocaleString()} / ${data.daily.limit.toLocaleString()}
         </p>
       </div>
     </div>

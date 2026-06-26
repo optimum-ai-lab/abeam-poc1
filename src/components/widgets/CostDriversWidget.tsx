@@ -3,33 +3,41 @@ import { MOCK_COST_DRIVERS } from '../../data';
 
 type Period = 'today' | 'week';
 
-interface DriverEntry {
+interface CostDriver {
   agentId: string;
+  agentName: string;
   totalCost: number;
-  runs: number;
+  runCount: number;
   costPerRun: number;
-  sharePercent: number;
+  shareOfTotal: number;
 }
 
-async function fetchDrivers(period: Period): Promise<DriverEntry[]> {
+interface CostDriversData {
+  period: Period;
+  totalSpend: number;
+  drivers: CostDriver[];
+  currency: 'USD';
+}
+
+async function fetchDrivers(period: Period): Promise<CostDriversData> {
   try {
     const res = await fetch(`/api/cost/drivers?period=${period}`);
     if (!res.ok) throw new Error('not ok');
     return res.json();
   } catch {
-    return MOCK_COST_DRIVERS;
+    return { ...MOCK_COST_DRIVERS, period };
   }
 }
 
 export function CostDriversWidget() {
   const [period, setPeriod] = useState<Period>('today');
-  const [drivers, setDrivers] = useState<DriverEntry[]>(MOCK_COST_DRIVERS);
+  const [drivers, setDrivers] = useState<CostDriver[]>(MOCK_COST_DRIVERS.drivers);
   const [loading, setLoading] = useState(false);
 
   async function load(p: Period) {
     setLoading(true);
     const result = await fetchDrivers(p);
-    setDrivers(result);
+    setDrivers(result.drivers);
     setLoading(false);
   }
 
@@ -79,7 +87,7 @@ export function CostDriversWidget() {
                 <div className="flex items-center gap-2 mb-1">
                   <span className="text-xs font-bold text-slate-400 dark:text-slate-500 w-4 text-right">{i + 1}</span>
                   <span className="text-xs font-medium text-slate-800 dark:text-slate-200 truncate flex-1">
-                    {d.agentId}
+                    {d.agentName}
                   </span>
                   <span className="text-xs font-semibold text-purple-500 whitespace-nowrap">
                     ${d.totalCost.toLocaleString()}
@@ -94,9 +102,9 @@ export function CostDriversWidget() {
                   </div>
                 </div>
                 <div className="ml-6 flex items-center gap-3 text-xs text-slate-400 dark:text-slate-500">
-                  <span>{d.runs} runs</span>
+                  <span>{d.runCount} runs</span>
                   <span>${d.costPerRun.toFixed(2)}/run</span>
-                  <span>{d.sharePercent.toFixed(1)}% of total</span>
+                  <span>{d.shareOfTotal.toFixed(1)}% of total</span>
                 </div>
               </div>
             ))}
