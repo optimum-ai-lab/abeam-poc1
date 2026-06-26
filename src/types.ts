@@ -81,8 +81,6 @@ export interface CostDriversData {
   currency: 'USD';
 }
 
-// --- End cost types ---
-
 export interface AgentActivity {
   id: string;
   agentName: string;

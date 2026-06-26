@@ -11,6 +11,10 @@ import { AgentStateWidget } from './components/widgets/AgentStateWidget';
 import { DeploymentLocationWidget } from './components/widgets/DeploymentLocationWidget';
 import { IssueRateWidget } from './components/widgets/IssueRateWidget';
 import { ActivitiesWidget } from './components/widgets/ActivitiesWidget';
+import { CostSummaryWidget } from './components/widgets/CostSummaryWidget';
+import { CostTrendWidget } from './components/widgets/CostTrendWidget';
+import { BudgetUtilizationWidget } from './components/widgets/BudgetUtilizationWidget';
+import { CostDriversWidget } from './components/widgets/CostDriversWidget';
 import { motion, AnimatePresence } from 'motion/react';
 import { useTheme } from './context/ThemeContext';
 
@@ -40,6 +44,10 @@ export default function App() {
       case 'deployment': return <DeploymentLocationWidget />;
       case 'issue_rate': return <IssueRateWidget />;
       case 'activities': return <ActivitiesWidget />;
+      case 'cost_summary': return <CostSummaryWidget />;
+      case 'cost_trend': return <CostTrendWidget />;
+      case 'budget_utilization': return <BudgetUtilizationWidget />;
+      case 'cost_drivers': return <CostDriversWidget />;
       default: return <div className="text-slate-400 text-sm p-4">Widget component not found.</div>;
     }
   };
