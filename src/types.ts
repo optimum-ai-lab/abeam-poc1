@@ -38,7 +38,7 @@ export interface CostSummaryData {
 export type TrendGranularity = 'hourly' | 'daily';
 
 export interface CostTrendPoint {
-  time: string;        // ISO-8601 label (e.g. "2026-06-26T14:00:00Z")
+  time: string;        // ISO-8601 timestamp (UTC) (e.g. "2026-06-26T14:00:00Z")
   label: string;       // display label (e.g. "14:00" or "Jun 20")
   cost: number;        // USD
   budget?: number;     // optional budget reference line value
@@ -51,7 +51,7 @@ export interface CostTrendData {
   currency: 'USD';
 }
 
-export interface BudgetData {
+export interface BudgetUtilizationData {
   daily: {
     limit: number;     // USD
     spent: number;     // USD

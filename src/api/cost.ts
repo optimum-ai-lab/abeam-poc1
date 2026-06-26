@@ -18,7 +18,7 @@
  */
 
 import {
-  BudgetData,
+  BudgetUtilizationData,
   CostDriversData,
   CostSummaryData,
   CostTrendData,
@@ -26,6 +26,7 @@ import {
 import {
   MOCK_BUDGET,
   MOCK_COST_DRIVERS,
+  MOCK_COST_DRIVERS_WEEK,
   MOCK_COST_SUMMARY,
   MOCK_COST_TREND_24H,
   MOCK_COST_TREND_30D,
@@ -76,7 +77,7 @@ export function fetchCostTrend(range: '24h' | '7d' | '30d' = '24h'): Promise<Cos
  * periods alongside current cumulative spend and a projected end-of-period
  * spend based on the current burn rate.
  */
-export function fetchBudget(): Promise<BudgetData> {
+export function fetchBudget(): Promise<BudgetUtilizationData> {
   return delay(MOCK_BUDGET);
 }
 
@@ -88,6 +89,5 @@ export function fetchBudget(): Promise<BudgetData> {
  * costPerRun, and shareOfTotal (% of overall spend).
  */
 export function fetchCostDrivers(period: 'today' | 'week' = 'today'): Promise<CostDriversData> {
-  const data = { ...MOCK_COST_DRIVERS, period };
-  return delay(data);
+  return delay(period === 'week' ? MOCK_COST_DRIVERS_WEEK : MOCK_COST_DRIVERS);
 }

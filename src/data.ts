@@ -1,4 +1,4 @@
-import { AgentActivity, BudgetData, CostDriversData, CostSummaryData, CostTrendData, DeploymentLocation, WidgetConfig } from './types';
+import { AgentActivity, BudgetUtilizationData, CostDriversData, CostSummaryData, CostTrendData, DeploymentLocation, WidgetConfig } from './types';
 
 export const WIDGET_LIBRARY: WidgetConfig[] = [
   { id: 'metrics_1', type: 'metrics', title: 'Key Metrics', description: 'Overview of total, active agents, and cost.', size: 'full' },
@@ -77,30 +77,30 @@ export const MOCK_COST_TREND_24H: CostTrendData = {
   granularity: 'hourly',
   currency: 'USD',
   points: [
-    { time: '2026-06-25T14:00:00Z', label: '14:00', cost: 98.2, budget: 120 },
-    { time: '2026-06-25T15:00:00Z', label: '15:00', cost: 112.5, budget: 120 },
-    { time: '2026-06-25T16:00:00Z', label: '16:00', cost: 145.3, budget: 120 },
-    { time: '2026-06-25T17:00:00Z', label: '17:00', cost: 138.9, budget: 120 },
-    { time: '2026-06-25T18:00:00Z', label: '18:00', cost: 95.4, budget: 120 },
-    { time: '2026-06-25T19:00:00Z', label: '19:00', cost: 78.1, budget: 120 },
-    { time: '2026-06-25T20:00:00Z', label: '20:00', cost: 65.0, budget: 120 },
-    { time: '2026-06-25T21:00:00Z', label: '21:00', cost: 52.3, budget: 120 },
-    { time: '2026-06-25T22:00:00Z', label: '22:00', cost: 44.8, budget: 120 },
-    { time: '2026-06-25T23:00:00Z', label: '23:00', cost: 39.1, budget: 120 },
-    { time: '2026-06-26T00:00:00Z', label: '00:00', cost: 31.2, budget: 120 },
-    { time: '2026-06-26T01:00:00Z', label: '01:00', cost: 28.9, budget: 120 },
-    { time: '2026-06-26T02:00:00Z', label: '02:00', cost: 25.4, budget: 120 },
-    { time: '2026-06-26T03:00:00Z', label: '03:00', cost: 22.7, budget: 120 },
-    { time: '2026-06-26T04:00:00Z', label: '04:00', cost: 31.5, budget: 120 },
-    { time: '2026-06-26T05:00:00Z', label: '05:00', cost: 48.3, budget: 120 },
-    { time: '2026-06-26T06:00:00Z', label: '06:00', cost: 87.6, budget: 120 },
-    { time: '2026-06-26T07:00:00Z', label: '07:00', cost: 122.4, budget: 120 },
-    { time: '2026-06-26T08:00:00Z', label: '08:00', cost: 154.8, budget: 120 },
-    { time: '2026-06-26T09:00:00Z', label: '09:00', cost: 178.2, budget: 120 },
-    { time: '2026-06-26T10:00:00Z', label: '10:00', cost: 165.9, budget: 120 },
-    { time: '2026-06-26T11:00:00Z', label: '11:00', cost: 143.1, budget: 120 },
-    { time: '2026-06-26T12:00:00Z', label: '12:00', cost: 198.5, budget: 120 },
-    { time: '2026-06-26T13:00:00Z', label: '13:00', cost: 186.3, budget: 120 },
+    { time: '2026-06-25T14:00:00Z', label: '14:00', cost: 98.2, budget: 125 },
+    { time: '2026-06-25T15:00:00Z', label: '15:00', cost: 112.5, budget: 125 },
+    { time: '2026-06-25T16:00:00Z', label: '16:00', cost: 145.3, budget: 125 },
+    { time: '2026-06-25T17:00:00Z', label: '17:00', cost: 138.9, budget: 125 },
+    { time: '2026-06-25T18:00:00Z', label: '18:00', cost: 95.4, budget: 125 },
+    { time: '2026-06-25T19:00:00Z', label: '19:00', cost: 78.1, budget: 125 },
+    { time: '2026-06-25T20:00:00Z', label: '20:00', cost: 65.0, budget: 125 },
+    { time: '2026-06-25T21:00:00Z', label: '21:00', cost: 52.3, budget: 125 },
+    { time: '2026-06-25T22:00:00Z', label: '22:00', cost: 44.8, budget: 125 },
+    { time: '2026-06-25T23:00:00Z', label: '23:00', cost: 39.1, budget: 125 },
+    { time: '2026-06-26T00:00:00Z', label: '00:00', cost: 31.2, budget: 125 },
+    { time: '2026-06-26T01:00:00Z', label: '01:00', cost: 28.9, budget: 125 },
+    { time: '2026-06-26T02:00:00Z', label: '02:00', cost: 25.4, budget: 125 },
+    { time: '2026-06-26T03:00:00Z', label: '03:00', cost: 22.7, budget: 125 },
+    { time: '2026-06-26T04:00:00Z', label: '04:00', cost: 31.5, budget: 125 },
+    { time: '2026-06-26T05:00:00Z', label: '05:00', cost: 48.3, budget: 125 },
+    { time: '2026-06-26T06:00:00Z', label: '06:00', cost: 87.6, budget: 125 },
+    { time: '2026-06-26T07:00:00Z', label: '07:00', cost: 122.4, budget: 125 },
+    { time: '2026-06-26T08:00:00Z', label: '08:00', cost: 154.8, budget: 125 },
+    { time: '2026-06-26T09:00:00Z', label: '09:00', cost: 178.2, budget: 125 },
+    { time: '2026-06-26T10:00:00Z', label: '10:00', cost: 165.9, budget: 125 },
+    { time: '2026-06-26T11:00:00Z', label: '11:00', cost: 143.1, budget: 125 },
+    { time: '2026-06-26T12:00:00Z', label: '12:00', cost: 198.5, budget: 125 },
+    { time: '2026-06-26T13:00:00Z', label: '13:00', cost: 186.3, budget: 125 },
   ],
 };
 
@@ -109,16 +109,17 @@ export const MOCK_COST_TREND_7D: CostTrendData = {
   granularity: 'daily',
   currency: 'USD',
   points: [
-    { time: '2026-06-20T00:00:00Z', label: 'Jun 20', cost: 1823.4, budget: 2000 },
-    { time: '2026-06-21T00:00:00Z', label: 'Jun 21', cost: 2104.7, budget: 2000 },
-    { time: '2026-06-22T00:00:00Z', label: 'Jun 22', cost: 1956.2, budget: 2000 },
-    { time: '2026-06-23T00:00:00Z', label: 'Jun 23', cost: 2389.5, budget: 2000 },
-    { time: '2026-06-24T00:00:00Z', label: 'Jun 24', cost: 2212.8, budget: 2000 },
-    { time: '2026-06-25T00:00:00Z', label: 'Jun 25', cost: 2098.1, budget: 2000 },
-    { time: '2026-06-26T00:00:00Z', label: 'Jun 26', cost: 2450.0, budget: 2000 },
+    { time: '2026-06-20T00:00:00Z', label: 'Jun 20', cost: 1823.4, budget: 3000 },
+    { time: '2026-06-21T00:00:00Z', label: 'Jun 21', cost: 2104.7, budget: 3000 },
+    { time: '2026-06-22T00:00:00Z', label: 'Jun 22', cost: 1956.2, budget: 3000 },
+    { time: '2026-06-23T00:00:00Z', label: 'Jun 23', cost: 2389.5, budget: 3000 },
+    { time: '2026-06-24T00:00:00Z', label: 'Jun 24', cost: 2212.8, budget: 3000 },
+    { time: '2026-06-25T00:00:00Z', label: 'Jun 25', cost: 2098.1, budget: 3000 },
+    { time: '2026-06-26T00:00:00Z', label: 'Jun 26', cost: 2450.0, budget: 3000 },
   ],
 };
 
+// 30D range excludes today — today's partial spend is shown in the 24h/7d views only.
 export const MOCK_COST_TREND_30D: CostTrendData = {
   range: '30d',
   granularity: 'daily',
@@ -157,7 +158,7 @@ export const MOCK_COST_TREND_30D: CostTrendData = {
   ],
 };
 
-export const MOCK_BUDGET: BudgetData = {
+export const MOCK_BUDGET: BudgetUtilizationData = {
   daily: {
     limit: 3000,
     spent: 2450,
@@ -184,5 +185,21 @@ export const MOCK_COST_DRIVERS: CostDriversData = {
     { agentId: 'agent-006', agentName: 'DataScraper_Beta', totalCost: 196.0, runCount: 392, costPerRun: 0.50, shareOfTotal: 8.0 },
     { agentId: 'agent-007', agentName: 'AnalyticsBot', totalCost: 147.0, runCount: 245, costPerRun: 0.60, shareOfTotal: 6.0 },
     { agentId: 'agent-008', agentName: 'TranslationAgent', totalCost: 98.0, runCount: 280, costPerRun: 0.35, shareOfTotal: 4.0 },
+  ],
+};
+
+export const MOCK_COST_DRIVERS_WEEK: CostDriversData = {
+  period: 'week',
+  totalSpend: 17150.0,
+  currency: 'USD',
+  drivers: [
+    { agentId: 'agent-001', agentName: 'DataScraper_Alpha', totalCost: 4287.5, runCount: 8750, costPerRun: 0.49, shareOfTotal: 25.0 },
+    { agentId: 'agent-002', agentName: 'ReportGen_V2', totalCost: 3430.0, runCount: 5915, costPerRun: 0.58, shareOfTotal: 20.0 },
+    { agentId: 'agent-003', agentName: 'CodeReviewer', totalCost: 2572.5, runCount: 4340, costPerRun: 0.59, shareOfTotal: 15.0 },
+    { agentId: 'agent-004', agentName: 'SupportBot_Prod', totalCost: 2058.0, runCount: 6860, costPerRun: 0.30, shareOfTotal: 12.0 },
+    { agentId: 'agent-005', agentName: 'EmailAgent', totalCost: 1715.0, runCount: 3430, costPerRun: 0.50, shareOfTotal: 10.0 },
+    { agentId: 'agent-006', agentName: 'DataScraper_Beta', totalCost: 1372.0, runCount: 2744, costPerRun: 0.50, shareOfTotal: 8.0 },
+    { agentId: 'agent-007', agentName: 'AnalyticsBot', totalCost: 1029.0, runCount: 1715, costPerRun: 0.60, shareOfTotal: 6.0 },
+    { agentId: 'agent-008', agentName: 'TranslationAgent', totalCost: 686.0, runCount: 1960, costPerRun: 0.35, shareOfTotal: 4.0 },
   ],
 };
