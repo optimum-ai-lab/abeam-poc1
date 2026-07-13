@@ -17,6 +17,7 @@ import { BudgetUtilizationWidget } from './components/widgets/BudgetUtilizationW
 import { CostDriversWidget } from './components/widgets/CostDriversWidget';
 import { motion, AnimatePresence } from 'motion/react';
 import { useTheme } from './context/ThemeContext';
+import { JstClock } from './components/JstClock';
 
 export default function App() {
   const { theme, toggleTheme } = useTheme();
@@ -76,6 +77,7 @@ export default function App() {
           </div>
         </div>
         <div className="flex items-center gap-3">
+          <JstClock />
           <button
             onClick={() => setIsLibraryOpen(true)}
             className="flex items-center gap-2 bg-indigo-600 hover:bg-indigo-500 text-white px-4 py-2 rounded-lg text-sm font-semibold transition-all"
