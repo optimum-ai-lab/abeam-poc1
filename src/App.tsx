@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { LayoutDashboard, Plus, Settings, Sun, Moon } from 'lucide-react';
-import { WidgetConfig } from './types';
-import { WIDGET_LIBRARY } from './data';
+import { useDashboardLayout } from './hooks/useDashboardLayout';
 import { WidgetLibrary } from './components/WidgetLibrary';
 import { WidgetContainer } from './components/widgets/WidgetContainer';
 import { MetricsWidget } from './components/widgets/MetricsWidget';
@@ -21,19 +20,9 @@ import { useTheme } from './context/ThemeContext';
 export default function App() {
   const { theme, toggleTheme } = useTheme();
 
-  const [activeWidgets, setActiveWidgets] = useState<WidgetConfig[]>(
-    WIDGET_LIBRARY.filter(w => ['metrics_1', 'trends_1', 'status_1', 'activities_1'].includes(w.id))
-  );
+  const { activeWidgets, addWidget, removeWidget } = useDashboardLayout();
 
   const [isLibraryOpen, setIsLibraryOpen] = useState(false);
-
-  const handleAddWidget = (widget: WidgetConfig) => {
-    setActiveWidgets(prev => [...prev, widget]);
-  };
-
-  const handleRemoveWidget = (widgetId: string) => {
-    setActiveWidgets(prev => prev.filter(w => w.id !== widgetId));
-  };
 
   const renderWidgetContent = (type: string) => {
     switch (type) {
@@ -126,7 +115,7 @@ export default function App() {
                 >
                   <WidgetContainer
                     title={widget.title}
-                    onRemove={() => handleRemoveWidget(widget.id)}
+                    onRemove={() => removeWidget(widget.id)}
                   >
                     {renderWidgetContent(widget.type)}
                   </WidgetContainer>
@@ -141,7 +130,7 @@ export default function App() {
         isOpen={isLibraryOpen}
         onClose={() => setIsLibraryOpen(false)}
         activeWidgetIds={activeWidgets.map(w => w.id)}
-        onAddWidget={handleAddWidget}
+        onAddWidget={addWidget}
       />
     </div>
   );
